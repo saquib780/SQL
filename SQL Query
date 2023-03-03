@@ -1,1 +1,23 @@
+SQL QUERY
+
+QUESTION : ACTIVE USER RETENTION 
+Assume you have the table below containing information on Facebook user actions. Write a query to obtain the active user retention in July 2022. Output the month (in numerical format 1, 2, 3) and the number of monthly active users (MAUs).
+Hint: An active user is a user who has user action ("sign-in", "like", or "comment") in the current month and last month.
+user_actions Table:
+Column Name	Type
+user_id, 
+event_id, 
+event_type, 
+event_date	
+
+SQL Query One: 
+SELECT EXTRACT (MONTH FROM curr_month.event_date) AS mth,
+       COUNT (DISTINCT curr_month.user_id) AS monthly_active_user 
+FROM user_actions AS curr_month
+JOIN user_actions AS last_month
+ON curr_month.user_id = last_month.user_id
+AND EXTRACT (MONTH from last_month.event_date) = EXTRACT (MONTH from current_month.event_date - interval '1 month')
+WHERE EXTRACT (MONTH FROM curr_month.event_date)= 7
+AND EXTRACT (YEAR FROM curr_month.event_date)= 2022
+GROUP BY EXTRACT (MONTH FROM curr_month.event_date);
 
