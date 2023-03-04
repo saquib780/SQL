@@ -21,3 +21,5 @@ WHERE EXTRACT (MONTH FROM curr_month.event_date)= 7
 AND EXTRACT (YEAR FROM curr_month.event_date)= 2022
 GROUP BY EXTRACT (MONTH FROM curr_month.event_date);
 
+The number of user retention is 2 in the month of July. 
+
