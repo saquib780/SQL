@@ -68,8 +68,13 @@ profiles.employer_id=company.company_id
 AND profiles.followers>company.followers
 ORDER BY profiles.profile_id ;
 
-
-
+Question Eight: Facebook pages with No Likes 
+SELECT pages.page_id
+FROM pages 
+LEFT OUTER JOIN page_likes AS likes 
+ON pages.page_id = likes.page_id
+WHERE likes.liked_date IS NULL
+ORDER BY pages.page_id;
 
 
 
