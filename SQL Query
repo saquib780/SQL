@@ -60,7 +60,13 @@ SELECT merchant_id,
   GROUP BY merchant_id
   ORDER BY total_transaction DESC;
 
-
+Question Seven : Linkedin Power Creators 
+SELECT profiles.profile_id
+FROM personal_profiles AS profiles 
+JOIN company_pages AS company ON
+profiles.employer_id=company.company_id
+AND profiles.followers>company.followers
+ORDER BY profiles.profile_id ;
 
 
 
