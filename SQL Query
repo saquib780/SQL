@@ -23,3 +23,54 @@ GROUP BY EXTRACT (MONTH FROM curr_month.event_date);
 
 The number of user retention is 2 in the month of July. 
 
+QUESTION : Tesla Unfinished parts 
+We need to understand the uni
+SQL Query Two : 
+SELECT part FROM 
+parts_assembly
+WHERE finish_date IS NULL
+GROUP BY part;
+
+Question: SQL Query Three : Highest Number of products 
+SELECT user_id, COUNT(user_id) AS product_num
+FROM user_transactions
+GROUP BY user_id
+HAVING SUM(spend)>=1000
+ORDER BY product_num DESC, SUM(spend) DESC
+LIMIT 3;
+
+Question Four: Most Expensive purchase 
+SELECT customer_id, MAX(purchase_amount) AS purchase_amount
+FROM transactions 
+GROUP BY customer_id
+ORDER BY purchase_amount DESC;
+
+Question Five : Cards Issued Difference 
+SELECT card_name, 
+MAX(issued_amount)-MIN(issued_amount) AS difference
+FROM monthly_cards_issued 
+GROUP BY card_name
+ORDER BY difference DESC;
+
+Question Six: Apple pay volume 
+SELECT merchant_id,
+  SUM(CASE WHEN LOWER(payment_method)='apple pay' 
+  THEN transaction_amount ELSE 0 END) AS total_transaction
+  FROM transactions
+  GROUP BY merchant_id
+  ORDER BY total_transaction DESC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
