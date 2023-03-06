@@ -112,8 +112,14 @@ GROUP BY candidate_id
 HAVING COUNT(skill)=3
 ORDER BY candidate_id;
 
-
-
+Question Thirteen: Teams Powers users
+SELECT sender_id, COUNT(sender_id) AS message_count
+FROM messages
+WHERE EXTRACT(MONTH FROM sent_date)= 8
+AND EXTRACT(YEAR FROM sent_date)= 2022
+GROUP BY sender_id
+ORDER BY message_count DESC
+LIMIT 2;
 
 
 
