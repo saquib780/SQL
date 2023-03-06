@@ -121,6 +121,16 @@ GROUP BY sender_id
 ORDER BY message_count DESC
 LIMIT 2;
 
+Question Fourteen: Cities with completed trades
+SELECT COUNT(trades.user_id) AS total_order, users.city  
+FROM trades
+JOIN users ON
+trades.user_id = users.user_id
+WHERE trades.status = 'Completed'
+GROUP BY users.city
+ORDER BY total_order DESC
+LIMIT 3; 
+
 
 
 
