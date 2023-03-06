@@ -76,8 +76,41 @@ ON pages.page_id = likes.page_id
 WHERE likes.liked_date IS NULL
 ORDER BY pages.page_id;
 
-Question Nine; 
+Question Nine: Active User Retention
+SELECT EXTRACT(MONTH FROM curr_month.event_date) AS mth, 
+COUNT(DISTINCT curr_month.user_id) AS monthly_active_users
+FROM user_actions AS curr_month
+JOIN user_actions AS last_month
+ON curr_month.user_id = last_month.user_id
+AND EXTRACT(MONTH FROM last_month.event_date) = EXTRACT(MONTH FROM curr_month.event_date - interval '1 month')
+WHERE EXTRACT(MONTH FROM curr_month.event_date) = 7
+AND EXTRACT(YEAR FROM curr_month.event_date) = 2022
+GROUP BY EXTRACT(MONTH FROM curr_month.event_date);
 
+Question Ten : Trade in payouts
+SELECT trade.store_id, 
+SUM(payouts.payout_amount) AS payout_total
+FROM trade_in_transactions AS trade
+JOIN trade_in_payouts AS payouts
+ON trade.model_id = payouts.model_id
+GROUP BY trade.store_id
+ORDER BY payout_total DESC;
+
+Question Eleven : Product Line Revenue
+SELECT info.product_line, SUM(transactions.amount) AS total_revenue
+FROM product_info AS info
+JOIN transactions 
+ON info.product_id = transactions.product_id
+GROUP BY info.product_line
+ORDER BY total_revenue DESC;
+
+Question Twelve : Data Science Skills
+SELECT candidate_id 
+FROM candidates 
+WHERE skill IN ('Python','Tableau','PostgreSQL')
+GROUP BY candidate_id
+HAVING COUNT(skill)=3
+ORDER BY candidate_id;
 
 
 
